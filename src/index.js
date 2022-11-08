@@ -1,13 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./index.css";
+import App from "./components/App";
+import reportWebVitals from "./reportWebVitals";
+import TeamList from "./components/teams/list/TeamList";
+import MatchList from "./components/matches/list/MatchList";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="" element={<TeamList />}></Route>
+          <Route path="matches/" element={<MatchList />}></Route>
+          <Route path="matches/:name" element={<MatchList />}></Route>
+        </Route>
+
+        <Route path="*" element={<App />}></Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

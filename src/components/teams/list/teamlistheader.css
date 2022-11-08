@@ -1,0 +1,9 @@
+.team_list_header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    background: rgb(255, 255, 255);
+    border: solid var(--primary) 3px;
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+}

@@ -1,0 +1,22 @@
+.match_list_header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    margin-top: 10px;
+    border: solid var(--primary) 3px
+    
+}
+.match_list_header_colum {
+    border-left: solid var(--primary) 3px;
+    margin: 10px 0px;
+}
+.match_list_header * {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+}
+.match_list_header_center {
+    display: flex;
+    
+}
