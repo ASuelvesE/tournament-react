@@ -9,6 +9,7 @@ export default function Nav() {
       <div className="nav-details">
         <Link to="/">Equipos</Link>
         <Link to="/matches">Resultados</Link>
+        <Link to="/admin">Admin</Link>
       </div>
     </nav>
   );

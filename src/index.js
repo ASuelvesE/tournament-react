@@ -6,6 +6,7 @@ import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import TeamList from "./components/teams/list/TeamList";
 import MatchList from "./components/matches/list/MatchList";
+import Forms from "./components/forms/Forms";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,6 +17,7 @@ root.render(
           <Route path="" element={<TeamList />}></Route>
           <Route path="matches/" element={<MatchList />}></Route>
           <Route path="matches/:name" element={<MatchList />}></Route>
+          <Route path="admin" element={<Forms />}></Route>
         </Route>
 
         <Route path="*" element={<App />}></Route>

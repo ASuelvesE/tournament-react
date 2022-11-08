@@ -1,0 +1,63 @@
+.form {
+    margin: 2% 20%;
+}
+.form_buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form_buttons button{
+    padding: 10px 20px;
+    border: solid black 3px;
+    border-radius: 7px;
+    font-size: 22px;
+    font-weight: bold;
+    background-color:  var(--primary);
+    color: white;
+    margin: 5%;
+}
+.form_buttons button:hover{
+    border-radius: 8px;
+    border: solid black 4px;
+    color: black;
+}
+.form_team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border: solid black 5px;
+    border-radius: 7px;
+    font-size: 22px;
+    font-weight: bold;
+}
+.form_team_row {
+    display: flex;  
+    justify-content: space-between;
+    width: 100%;
+}
+.form_team_row *{
+    margin: 15px;
+}
+.btn_submit{
+    padding: 10px 20px;
+    border: solid black 3px;
+    border-radius: 7px;
+    font-size: 22px;
+    font-weight: bold;
+    background-color:  var(--primary);
+    color: white;
+    margin: 5%;
+}
+.btn_submit:hover{
+    border-radius: 8px;
+    border: solid black 4px;
+    color: black;
+}
+.form_team_row input {
+    width: 90%;
+    text-align: center;
+}
+label {
+    text-align: left;
+}
