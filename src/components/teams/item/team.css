@@ -8,6 +8,8 @@
             0 6.7px 5.3px rgba(0, 0, 0, .048),
             0 12.5px 10px rgba(0, 0, 0, .06);
     border: solid var(--primary) 3px;
+    border-radius: 7px;
+    margin-bottom: 10px;
 }
 .team_item *{
     text-align: center;
@@ -36,9 +38,30 @@ a:link, a:visited, a:active {
 }
 
 .team_item h3{
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 .points{
     text-align: center;
+}
+@media (max-width: 600px) {
+    .team_item{
+        display:grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        align-items: center;
+        padding: 3px;
+        background: rgb(255, 255, 255);
+        border: solid var(--primary) 2px;
+        border-radius: 5px;
+        margin-bottom: 7px;
+    }
+    .team_item img {
+        height: 6vh;
+        width: 6vh;
+        margin: auto;
+        border-radius: 50%;
+    }
+    p {
+        font-size: 14px;
+    }
 }

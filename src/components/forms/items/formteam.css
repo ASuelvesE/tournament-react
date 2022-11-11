@@ -38,3 +38,19 @@
 label {
     text-align: left;
 }
+@media (max-width: 600px) {
+    .form_team {
+        border: solid black 3px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .btn_submit{
+        border: solid black 2px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    .form {
+        margin: 0px;
+    }
+}

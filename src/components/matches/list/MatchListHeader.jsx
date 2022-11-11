@@ -7,16 +7,16 @@ export default function TeamListHeader({ team, position }) {
 
         <div className="match_list_header">
             <div className="match_list_header_colum">
-                <h2>Fecha</h2>
+                <h4>Fecha</h4>
             </div>
 
             <div className="match_list_header_colum match_list_header_center">
-                <h2>Equipo</h2>
-                <h2>Puntuación</h2>
+                <h4>Equipo</h4>
+                <h4>Puntuación</h4>
             </div>
             <div className="match_list_header_colum match_list_header_center">
-                <h2>Equipo</h2>
-                <h2>Puntuación</h2>
+                <h4>Equipo</h4>
+                <h4>Puntuación</h4>
             </div>
         </div>
 

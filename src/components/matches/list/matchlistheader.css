@@ -1,13 +1,14 @@
 .match_list_header {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin-top: 10px;  
     background: rgb(255, 255, 255);
-    margin-top: 10px;
-    
+    border: solid var(--primary) 3px;
+    border-radius: 7px;
+    font-size: 20px;
 }
 .match_list_header_colum {
-    border: solid var(--primary) 3px;
     padding: 10px 0px;
 }
 .match_list_header * {
@@ -17,5 +18,11 @@
 }
 .match_list_header_center {
     display: flex;
-    
+}
+@media (max-width: 600px) {
+    .match_list_header {
+        border: solid var(--primary) 2px;
+        border-radius: 3px;
+        font-size: 10px;
+    }
 }

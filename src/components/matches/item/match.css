@@ -5,6 +5,7 @@
     padding: var(--padding);
     background: rgb(255, 255, 255);
     border: solid var(--primary) 3px;
+    border-radius: 7px;
 }
 .match_item:hover {
     background-color: var(--primary);
@@ -19,7 +20,7 @@
 .match_item *{
     width: 100%;
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
 }
 .match_container {
     display: flex;
@@ -47,10 +48,28 @@
     border-radius: 50%;
 }
 .match_item h3{
-    font-size: 1.5em;
+    font-size: 0.9em;
 }
 
 .points{
     text-align: right;
 }
 
+@media (max-width: 600px) {
+    .match_item {
+        border: solid var(--primary) 2px;
+        border-radius: 5px;
+    }
+    .match_item *{
+        width: 100%;
+        text-align: center;
+        font-size: 10px;
+    }
+    .match_img_logo {
+        height: 5vh;
+        width: 5vh;
+        margin: auto;
+        border-radius: 50%;
+    }
+
+}
