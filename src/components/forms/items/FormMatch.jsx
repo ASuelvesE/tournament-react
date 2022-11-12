@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./formmatch.css"
 
 export default function FormMatch() {
@@ -9,32 +8,44 @@ export default function FormMatch() {
     const [pointsA, setPointsA] = useState([]);
     const [pointsB, setPointsB] = useState([]);
     const [message, setMessage] = useState([]);
+    const [userId, setUserId] = useState([]);
 
+    useEffect(() => {
+        const profile = JSON.parse(localStorage.getItem("user"));
+        setUserId(profile.googleId);
+    });
+    const auth = () => {
+        if (userId === "111619516153194658479")
+            return true;
+        return false;
+    }
 
     const pathMatches = `${process.env.REACT_APP_API}/matches`;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            let res = await fetch(`${pathMatches}`, {
-                method: 'POST',
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    datetime: datetime,
-                    teamA: teamA,
-                    teamB: teamB,
-                    pointsA: pointsA,
-                    pointsB: pointsB,
-                }),
-            });
-            if (res.status === 200) {
-                window.location = '/'
+        if (auth()) {
+            try {
+                let res = await fetch(`${pathMatches}`, {
+                    method: 'POST',
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        datetime: datetime,
+                        teamA: teamA,
+                        teamB: teamB,
+                        pointsA: pointsA,
+                        pointsB: pointsB,
+                    }),
+                });
+                if (res.status === 200) {
+                    window.location = '/'
+                }
+            } catch (err) {
+                console.log(err);
             }
-        } catch (err) {
-            console.log(err);
         }
     };
 

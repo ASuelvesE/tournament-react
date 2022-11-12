@@ -11,10 +11,17 @@ import "./matchlist.css";
 export default function TeamList() {
   const [results, setResults] = useState([]);
   let { name } = useParams();
+  const [userId, setUserId] = useState([]);
 
   useEffect(() => {
-    fetchResults();
-  }, []);
+      const profile = JSON.parse(localStorage.getItem("user"));
+      if(profile != null){
+        setUserId(profile.googleId);
+        fetchResults();
+      }else {
+        alert("Inicia sesión!");
+      }
+  });
 
   const fetchResults = async () => {
     try {

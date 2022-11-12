@@ -12,11 +12,14 @@ nav {
 }
 
 .nav-details > a{
-    margin: 0px var(--margin);
+    margin: 0px 20px;
     text-decoration: none;
     color: var(--secondary);
 }
 
 .nav-details > a:hover{
     color: var(--primary);
+}
+.google{
+    margin: 10px;
 }

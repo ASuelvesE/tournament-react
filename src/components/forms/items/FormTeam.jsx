@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./formteam.css"
 
 export default function FormTeam() {
@@ -7,30 +7,42 @@ export default function FormTeam() {
     const [details, setDetails] = useState([]);
     const [image, setImage] = useState([]);
     const [message, setMessage] = useState([]);
+    const [userId, setUserId] = useState([]);
 
+    useEffect(() => {
+        const profile = JSON.parse(localStorage.getItem("user"));
+        setUserId(profile.googleId);
+    });
+    const auth = () => {
+        if (userId === "111619516153194658479")
+            return true;
+        return false;
+    }
 
     const pathTeams = `${process.env.REACT_APP_API}/teams`;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            let res = await fetch(`${pathTeams}`, {
-                method: 'POST',
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name: name,
-                    details: details,
-                    image: image,
-                }),
-            });
-            if (res.status === 200) {
-                window.location = '/'
+        if (auth()) {
+            try {
+                let res = await fetch(`${pathTeams}`, {
+                    method: 'POST',
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        details: details,
+                        image: image,
+                    }),
+                });
+                if (res.status === 200) {
+                    window.location = '/'
+                }
+            } catch (err) {
+                console.log(err);
             }
-        } catch (err) {
-            console.log(err);
         }
     };
 

@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
-
 import { getTeams } from "../../../services/team.service";
-
 import TeamItem from "../item/TeamItem";
-
 import "./teamlist.css";
 import TeamListHeader from "./TeamListHeader";
 
 export default function TeamList() {
   const [teams, setTeams] = useState([]);
+  const [userId, setUserId] = useState([]);
 
   useEffect(() => {
-    fetchTeams();
-  }, []);
+      const profile = JSON.parse(localStorage.getItem("user"));
+      if(profile != null){
+        setUserId(profile.googleId);
+        fetchTeams();
+      }else {
+        alert("Inicia sesión!");
+      }
+  });
 
   const fetchTeams = async () => {
     try {
