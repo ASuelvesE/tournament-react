@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {getAdminByToken} from "../../../services/admin.service";
 import "./formmatch.css"
 
 export default function FormMatch() {
@@ -9,56 +8,45 @@ export default function FormMatch() {
     const [pointsA, setPointsA] = useState([]);
     const [pointsB, setPointsB] = useState([]);
     const [message, setMessage] = useState([]);
-    const [auth, setAuth] = useState(false);
+    const [token, setToken] = useState([]);
+    const [profile, setProfile] = useState([]);
 
     useEffect(() => {
-        const profile = JSON.parse(localStorage.getItem("user"));
-        const token = JSON.parse(localStorage.getItem("accessToken"));
-        const data = {
-            profile: profile,
-            token: token
-          }
-        fetchAdmins(data)
+        setProfile(JSON.parse(localStorage.getItem("user")));
+        setToken(JSON.parse(localStorage.getItem("token")));
     }, []);
-    const fetchAdmins = async (data) => {
-        try {
-            let response = await getAdminByToken(data);
-            if (response[0].email === data.profile.email) {
-                setAuth(true)
-            }
-        } catch (e) {
-            setAuth(false)
-            //console.log(e);
-        }
-    };
+
 
     const pathMatches = `${process.env.REACT_APP_API}/matches`;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (auth) {
-            try {
-                let res = await fetch(`${pathMatches}`, {
-                    method: 'POST',
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
+
+        try {
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", token);
+            myHeaders.append("Content-Type", "application/json");
+            let res = await fetch(`${pathMatches}`, {
+                method: 'POST',
+                headers: myHeaders,
+                body: JSON.stringify({
+                    match:{
                         datetime: datetime,
                         teamA: teamA,
                         teamB: teamB,
                         pointsA: pointsA,
-                        pointsB: pointsB,
-                    }),
-                });
-                if (res.status === 200) {
-                    window.location = '/'
-                }
-            } catch (err) {
-                console.log(err);
+                        pointsB: pointsB
+                    },
+                    profile: profile
+                }),
+            });
+            if (res.status === 200) {
+                window.location = '/'
             }
+        } catch (err) {
+            console.log(err);
         }
+
     };
 
     return (

@@ -1,6 +1,5 @@
 
 import React, { useEffect, useState } from "react";
-import {getAdminByToken} from "../../../services/admin.service";
 import "./formteam.css"
 
 export default function FormTeam() {
@@ -8,55 +7,43 @@ export default function FormTeam() {
     const [details, setDetails] = useState([]);
     const [image, setImage] = useState([]);
     const [message, setMessage] = useState([]);
-    const [auth, setAuth] = useState(false);
+    const [token, setToken] = useState([]);
+    const [profile, setProfile] = useState([]);
 
     useEffect(() => {
-        const profile = JSON.parse(localStorage.getItem("user"));
-        const token = JSON.parse(localStorage.getItem("accessToken"));
-        const data = {
-            profile: profile,
-            token: token
-          }
-        fetchAdmins(data)
+        setProfile(JSON.parse(localStorage.getItem("user")));
+        setToken(JSON.parse(localStorage.getItem("token")));
     }, []);
-    const fetchAdmins = async (data) => {
-        try {
-            let response = await getAdminByToken(data);
-            console.log(response)
-            if (response[0].email === data.profile.email) {
-                setAuth(true)
-            }
-        } catch (e) {
-            setAuth(false)
-            //console.log(e);
-        }
-    };
+
 
     const pathTeams = `${process.env.REACT_APP_API}/teams`;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (auth) {
-            try {
-                let res = await fetch(`${pathTeams}`, {
-                    method: 'POST',
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
+
+        try {
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", token);
+            myHeaders.append("Content-Type", "application/json");
+            let res = await fetch(`${pathTeams}`, {
+                method: 'POST',
+                headers: myHeaders,
+                body: JSON.stringify({
+                    team: {
                         name: name,
                         details: details,
-                        image: image,
-                    }),
-                });
-                if (res.status === 200) {
-                    window.location = '/'
-                }
-            } catch (err) {
-                console.log(err);
+                        image: image
+                    },
+                    profile: profile
+                }),
+            });
+            if (res.status === 200) {
+                window.location = '/'
             }
+        } catch (err) {
+            console.log(err);
         }
+
     };
 
     return (

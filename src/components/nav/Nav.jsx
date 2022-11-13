@@ -22,11 +22,12 @@ export default function Nav() {
   const fetchAdmins = async (data) => {
     try {
       let response = await getAdmin(data);
-      localStorage.setItem("accessToken", JSON.stringify(response[0].accessToken))
-      if(response[0].email === data.profile.email){
+      localStorage.setItem("token", JSON.stringify(response[0].token))
+      if(response[0].token){
         setAuth(true)
       }
     } catch (e) {
+      localStorage.setItem("token", null)
       setAuth(false)
       //console.log(e);
     }
@@ -35,8 +36,7 @@ export default function Nav() {
   const onSuccess = async (res) => {
     localStorage.setItem("user", JSON.stringify(res.profileObj))
     const data = {
-      profile: res.profileObj,
-      token: res.accessToken
+      profile: res.profileObj
     }
     fetchAdmins(data);
     //console.log(res)

@@ -18,21 +18,4 @@ const getAdmin = async (datos) => {
   }
 };
 
-const getAdminByToken = async (datos) => {
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  try {
-    const response = await fetch(`${pathAdmins}/token`,{
-      method: 'POST',
-      headers: myHeaders,
-      body: JSON.stringify(datos)
-    });
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    console.log(err);
-    return [];
-  }
-};
-
-export { getAdmin, getAdminByToken };
+export { getAdmin };
