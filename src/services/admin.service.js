@@ -1,9 +1,15 @@
 const pathAdmins = `${process.env.REACT_APP_API}/admins`;
 
 
-const getAdmins = async (email) => {
+const getAdmin = async (datos) => {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
   try {
-    const response = await fetch(`${pathAdmins}/${email}`);
+    const response = await fetch(pathAdmins,{
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify(datos)
+    });
     const data = await response.json();
     return data;
   } catch (err) {
@@ -12,4 +18,21 @@ const getAdmins = async (email) => {
   }
 };
 
-export { getAdmins };
+const getAdminByToken = async (datos) => {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  try {
+    const response = await fetch(`${pathAdmins}/token`,{
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify(datos)
+    });
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+export { getAdmin, getAdminByToken };

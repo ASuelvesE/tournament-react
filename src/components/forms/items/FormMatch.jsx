@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {getAdminByToken} from "../../../services/admin.service";
 import "./formmatch.css"
 
 export default function FormMatch() {
@@ -8,23 +9,34 @@ export default function FormMatch() {
     const [pointsA, setPointsA] = useState([]);
     const [pointsB, setPointsB] = useState([]);
     const [message, setMessage] = useState([]);
-    const [userId, setUserId] = useState([]);
+    const [auth, setAuth] = useState(false);
 
     useEffect(() => {
         const profile = JSON.parse(localStorage.getItem("user"));
-        setUserId(profile.googleId);
-    });
-    const auth = () => {
-        if (userId === "111619516153194658479")
-            return true;
-        return false;
-    }
+        const token = JSON.parse(localStorage.getItem("accessToken"));
+        const data = {
+            profile: profile,
+            token: token
+          }
+        fetchAdmins(data)
+    }, []);
+    const fetchAdmins = async (data) => {
+        try {
+            let response = await getAdminByToken(data);
+            if (response[0].email === data.profile.email) {
+                setAuth(true)
+            }
+        } catch (e) {
+            setAuth(false)
+            //console.log(e);
+        }
+    };
 
     const pathMatches = `${process.env.REACT_APP_API}/matches`;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (auth()) {
+        if (auth) {
             try {
                 let res = await fetch(`${pathMatches}`, {
                     method: 'POST',

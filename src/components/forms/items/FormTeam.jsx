@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from "react";
+import {getAdminByToken} from "../../../services/admin.service";
 import "./formteam.css"
 
 export default function FormTeam() {
@@ -7,23 +8,35 @@ export default function FormTeam() {
     const [details, setDetails] = useState([]);
     const [image, setImage] = useState([]);
     const [message, setMessage] = useState([]);
-    const [userId, setUserId] = useState([]);
+    const [auth, setAuth] = useState(false);
 
     useEffect(() => {
         const profile = JSON.parse(localStorage.getItem("user"));
-        setUserId(profile.googleId);
-    });
-    const auth = () => {
-        if (userId === "111619516153194658479")
-            return true;
-        return false;
-    }
+        const token = JSON.parse(localStorage.getItem("accessToken"));
+        const data = {
+            profile: profile,
+            token: token
+          }
+        fetchAdmins(data)
+    }, []);
+    const fetchAdmins = async (data) => {
+        try {
+            let response = await getAdminByToken(data);
+            console.log(response)
+            if (response[0].email === data.profile.email) {
+                setAuth(true)
+            }
+        } catch (e) {
+            setAuth(false)
+            //console.log(e);
+        }
+    };
 
     const pathTeams = `${process.env.REACT_APP_API}/teams`;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (auth()) {
+        if (auth) {
             try {
                 let res = await fetch(`${pathTeams}`, {
                     method: 'POST',

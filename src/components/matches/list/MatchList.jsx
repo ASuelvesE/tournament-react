@@ -21,7 +21,7 @@ export default function TeamList() {
       }else {
         alert("Inicia sesión!");
       }
-  });
+  }, []);
 
   const fetchResults = async () => {
     try {
