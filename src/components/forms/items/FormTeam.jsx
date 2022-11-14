@@ -1,5 +1,7 @@
 
 import React, { useEffect, useState } from "react";
+import LoadingIndicator from "../../utils/LoadingIndicator";
+import { trackPromise } from 'react-promise-tracker';
 import "./formteam.css"
 
 export default function FormTeam() {
@@ -25,7 +27,7 @@ export default function FormTeam() {
             const myHeaders = new Headers();
             myHeaders.append("Authorization", token);
             myHeaders.append("Content-Type", "application/json");
-            let res = await fetch(`${pathTeams}`, {
+            let res = await trackPromise(fetch(`${pathTeams}`, {
                 method: 'POST',
                 headers: myHeaders,
                 body: JSON.stringify({
@@ -36,7 +38,7 @@ export default function FormTeam() {
                     },
                     profile: profile
                 }),
-            });
+            }));
             if (res.status === 200) {
                 window.location = '/'
             }
@@ -48,7 +50,7 @@ export default function FormTeam() {
 
     return (
         <div className="form_team_container">
-
+      <LoadingIndicator/>
             <form action={pathTeams} className="form_team" onSubmit={handleSubmit} >
                 <div className="form_team_row">
                     <label>Nombre:</label><br />

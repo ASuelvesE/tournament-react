@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import LoadingIndicator from "../../utils/LoadingIndicator";
+import { trackPromise } from 'react-promise-tracker';
 import "./formmatch.css"
 
 export default function FormMatch() {
@@ -26,7 +28,7 @@ export default function FormMatch() {
             const myHeaders = new Headers();
             myHeaders.append("Authorization", token);
             myHeaders.append("Content-Type", "application/json");
-            let res = await fetch(`${pathMatches}`, {
+            let res = await trackPromise(fetch(`${pathMatches}`, {
                 method: 'POST',
                 headers: myHeaders,
                 body: JSON.stringify({
@@ -39,7 +41,7 @@ export default function FormMatch() {
                     },
                     profile: profile
                 }),
-            });
+            }));
             if (res.status === 200) {
                 window.location = '/'
             }
@@ -51,7 +53,7 @@ export default function FormMatch() {
 
     return (
         <div className="form_match_container">
-
+      <LoadingIndicator/>
             <form action={pathMatches} className="form_match" onSubmit={handleSubmit} >
                 <div className="form_match_row">
                     <label>Fecha:</label><br />
