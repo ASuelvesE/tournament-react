@@ -1,8 +1,9 @@
+import { trackPromise } from 'react-promise-tracker';
 const pathResults = `${process.env.REACT_APP_API}/matches/`;
 
 const getMatches = async () => {
   try {
-    const response = await fetch(pathResults);
+    const response = await await trackPromise(fetch(pathResults));
     const data = await response.json();
     return data;
   } catch (err) {
@@ -13,7 +14,7 @@ const getMatches = async () => {
 
 const getMatchesByName = async (name) => {
   try {
-    const response = await fetch(`${pathResults}/${name}`);
+    const response = await await trackPromise(fetch(`${pathResults}/${name}`));
     const data = await response.json();
     return data;
   } catch (err) {
