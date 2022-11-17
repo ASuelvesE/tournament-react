@@ -1,5 +1,5 @@
 import { trackPromise } from 'react-promise-tracker';
-const pathAdmins = `${process.env.REACT_APP_API}/admins`;
+const pathAdmins = `${process.env.REACT_APP_API_AWS}/admins`;
 
 
 const getAdmin = async (datos) => {

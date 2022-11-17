@@ -1,5 +1,5 @@
 import { trackPromise } from 'react-promise-tracker';
-const pathResults = `${process.env.REACT_APP_API}/matches/`;
+const pathResults = `${process.env.REACT_APP_API_AWS}/matches/`;
 
 const getMatches = async () => {
   try {

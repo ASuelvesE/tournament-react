@@ -1,5 +1,5 @@
 import { trackPromise } from 'react-promise-tracker';
-const pathTeams = `${process.env.REACT_APP_API}/teams`;
+const pathTeams = `${process.env.REACT_APP_API_AWS}/teams`;
 
 
 const getTeams = async () => {
