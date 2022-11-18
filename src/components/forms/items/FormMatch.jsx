@@ -19,7 +19,7 @@ export default function FormMatch() {
     }, []);
 
 
-    const pathMatches = `${process.env.REACT_APP_API}/matches`;
+    const pathMatches = `${process.env.REACT_APP_API_AWS}/matches`;
 
     const handleSubmit = async (e) => {
         e.preventDefault();

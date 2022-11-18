@@ -18,7 +18,7 @@ export default function FormTeam() {
     }, []);
 
 
-    const pathTeams = `${process.env.REACT_APP_API}/teams`;
+    const pathTeams = `${process.env.REACT_APP_API_AWS}/teams`;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
